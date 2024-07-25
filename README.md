@@ -17,10 +17,4 @@
 ## Implemented features
    - Application allows access only to authorized users
    - Application has to support two roles: admin, user
-   - Application allows user to CRUD tasks
-
-## TO IMPLEMENT features
-   - Only admins can create new users using form
-   - Panel Admin
-   - CRUD categories, statuses (?user?)
-   - maybe sth else
+   - Application allows user to CRUD tasks, categories, statuses
