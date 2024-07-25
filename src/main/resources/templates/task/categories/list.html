@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+>
+<head th:replace="~{base :: html-head(~{::title})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}">
+    <title>ToDo - category list</title>
+</head>
+<style>
+    body, html {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: white;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        overflow: hidden;
+        animation: slideInUp .7s ease-in-out;
+    }
+
+    .table th, .table td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+        text-align: center;
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+    }
+
+    .d-flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .m-1 {
+        margin: 0.5rem;
+    }
+
+    button {
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .button:hover {
+        transform: scale(1.2);
+    }
+
+    th, td {
+        animation: slideInLeft .7s ease-in-out;
+    }
+
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<body>
+<nav th:replace="~{base :: navbar}"></nav>
+<main>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category: ${categories}">
+                <th scope="row" th:text="${category.id}"></th>
+                <td th:text="${category.name}"></td>
+                <td th:text="${category.description}"></td>
+
+                <td class="d-flex">
+                    <form class="m-1" id="editForm" name="editForm" th:action="@{/category/edit/{categoryId}(categoryId=${category.id})}"
+                          method="get" onchange="submit()">
+                        <button class="button" style="background: transparent; border: none;">🖋️</button>
+                    </form>
+                    <form class="m-1" id="deleteForm" name="deleteForm" th:action="@{/category/delete/{categoryId}(categoryId=${category.id})}"
+                          method="get" onchange="submit()">
+                        <button class="button" style="background: transparent; border: none;">❌</button>
+                    </form>
+                </td>
+            </tr>
+
+            <tr th:if="${categories.isEmpty()}">
+                <td colspan="8" class="text-center">Your categories list is empty!</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

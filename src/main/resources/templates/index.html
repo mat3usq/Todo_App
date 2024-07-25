@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="~{base :: html-head(~{::title})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}">
+</head>
+<style>
+    body, html {
+        height: 100%;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: white;
+    }
+
+    .main-content {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .main-content h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        animation: fadeInDown .7s ease-in-out;
+    }
+
+    .main-content .btn {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+        border-radius: 30px;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        animation: fadeInUp .7s ease-in-out;
+    }
+
+    .main-content .btn:hover {
+        background-color: #ff5e57;
+        transform: scale(1.1);
+    }
+
+    .main-content .btn i {
+        margin-right: 10px;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<body>
+
+<div class="container main-content">
+    <div>
+        <h1>Welcome in To-Do App</h1>
+        <a th:href="@{/auth/login}" class="btn btn-primary btn-lg">
+            <i class="fas fa-sign-in-alt"></i> Log In
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

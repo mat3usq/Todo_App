@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{base :: html-head(~{::title})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}">
+    <title>ToDo - Login</title>
+</head>
+<style>
+    body, html {
+        height: 100%;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: white;
+    }
+
+    .login-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        width: 25rem;
+    }
+
+    .card-body {
+        padding: 30px;
+    }
+
+    .form-control {
+        border-radius: 30px;
+        background-color: white;
+        color: black;
+    }
+
+    .btn-primary {
+        background-color: #ff5e57;
+        border: none;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff2e1f;
+        transform: scale(1.1);
+    }
+
+    label, h2 {
+        color: black;
+    }
+
+    .btn-primary:focus {
+        box-shadow: none;
+    }
+
+    .card-body h2 {
+        animation: slideInDown .7s ease-in-out;
+    }
+
+    .card-body .form-control, .card-body label {
+        animation: slideInLeft .7s ease-in-out;
+    }
+
+    .card-body .btn {
+        animation: slideInUp .7s ease-in-out;
+    }
+
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<body>
+
+<div class="login-form">
+    <fieldset th:fragment="login-form" class="card container mt-3" sec:authorize="isAnonymous()">
+        <form method="post" th:action="@{/auth/process}">
+            <div class="card-body g-3 align-items-center">
+                <div class="text-center mb-4">
+                    <h2 class="font-weight-bold">Log In</h2>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <label for="username" class="col-form-label">Username</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-3">
+                        <label for="password" class="col-form-label">Password</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <button class="btn btn-primary" type="submit">Log In</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <span style="margin-inline: auto; margin-block: 10px">Don't have account? <a th:href="@{/auth/register}">Register</a></span>
+    </fieldset>
+</div>
+
+</body>
+</html>

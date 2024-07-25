@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="~{base :: html-head(~{::title})}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}">
+    <title>Edit status</title>
+</head>
+<style>
+    body, html {
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        color: white;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .form-control {
+        border-radius: 30px;
+        background-color: white;
+        color: black;
+    }
+
+    .btn-primary, .btn-secondary {
+        border: none;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        width: 100%;
+        padding: 10px 0;
+        margin: 10px 0;
+    }
+
+    .btn-primary {
+        background-color: #ff5e57;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff2e1f;
+        transform: scale(1.05);
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        transform: scale(1.05);
+    }
+
+    label, h1 {
+        color: black;
+    }
+
+    .btn-primary:focus, .btn-secondary:focus {
+        box-shadow: none;
+    }
+
+    h1 {
+        animation: slideInDown .7s ease-in-out;
+    }
+
+    .form-control, label {
+        animation: slideInLeft .7s ease-in-out;
+    }
+
+    .btn {
+        animation: slideInUp .7s ease-in-out;
+    }
+
+    @keyframes slideInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+<body>
+<nav th:replace="~{base :: navbar}"></nav>
+<main>
+    <div class="container">
+        <h1>Status Edition</h1>
+
+        <form th:action="@{/status/edit/{statusId}(statusId=${status.id})}" method="post" th:object="${status}">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-secondary" th:href="@{/status}">Back</a>
+        </form>
+
+    </div>
+</main>
+
+</body>
+</html>
